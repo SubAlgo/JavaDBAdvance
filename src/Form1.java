@@ -41,6 +41,27 @@ public class Form1 extends javax.swing.JFrame {
         }
     }
     //---------------------
+    
+    //----ดึงข้อมูลใส่ ComdoBox--------------
+    public void ShowDataCombo(){
+        
+        try{
+            String sql = "Select * From tbstudent";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while(rs.next()){
+                String name1 =rs.getString("fname");
+                combostudent.addItem(name1);
+            }
+        }catch(Exception e){
+            e.getStackTrace();
+        }
+    }
+    
+    
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -49,6 +70,8 @@ public class Form1 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbstudent = new javax.swing.JTable();
         btnShowData = new javax.swing.JButton();
+        combostudent = new javax.swing.JComboBox<>();
+        btnsetcombo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,15 +111,26 @@ public class Form1 extends javax.swing.JFrame {
             }
         });
 
+        btnsetcombo.setText("Add Data to Combo");
+        btnsetcombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsetcomboActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(combostudent, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addGap(50, 50, 50)
-                .addComponent(btnShowData, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnShowData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnsetcombo, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -104,12 +138,16 @@ public class Form1 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(107, 107, 107)
-                        .addComponent(btnShowData, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(205, Short.MAX_VALUE))
+                        .addComponent(btnShowData, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(combostudent)
+                    .addComponent(btnsetcombo, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE))
+                .addContainerGap(349, Short.MAX_VALUE))
         );
 
         pack();
@@ -120,6 +158,10 @@ public class Form1 extends javax.swing.JFrame {
         showDataToForm();
         
     }//GEN-LAST:event_btnShowDataActionPerformed
+
+    private void btnsetcomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsetcomboActionPerformed
+       ShowDataCombo();
+    }//GEN-LAST:event_btnsetcomboActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -155,6 +197,8 @@ public class Form1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnShowData;
+    private javax.swing.JButton btnsetcombo;
+    private javax.swing.JComboBox<String> combostudent;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbstudent;
     // End of variables declaration//GEN-END:variables
